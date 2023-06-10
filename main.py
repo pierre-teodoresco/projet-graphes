@@ -1,80 +1,74 @@
-# Stable marriage problem solver
+# Description: This file contains the implementation of the Stable Marriage Problem
+# Authors: Eliot Colomb & Pierre Teodoresco
 
-# Simple static example
-def stable_marriage(serenades_prefs, balconies_prefs):
-    # create dictionaries of preferences for both serenades and balconies
-    serenades_prefs = {serenade: preferences for serenade, preferences in serenades_prefs.items()}
-    balconies_prefs = {balcony: preferences for balcony, preferences in balconies_prefs.items()}
-    # create a dictionary of engaged serenades initialized to None
-    serenade_engaged = {}
-    # create a dictionary of available balconies initialized to 1
-    balcony_slots = {balcony: 1 for balcony in balconies_prefs}
+# Stable Marriage Problem
+def stable_marriage(students_prefs, colleges_prefs, slots_per_college):
+    students_prefs = {student: preferences for student, preferences in students_prefs.items()}
+    colleges_prefs = {college: preferences for college, preferences in colleges_prefs.items()}
+    student_engaged = {}
+    college_slots = {college: slots_per_college for college in colleges_prefs}
+    unmatched_students = {}
 
-    # while there are still serenades without a balcony
-    while serenades_prefs:
-        # get the first serenade in the list of serenades
-        b = next(iter(serenades_prefs))
-        # get the list of balconies that the serenade prefers
-        balcony_list = serenades_prefs[b]
+    while students_prefs and any(slots > 0 for slots in college_slots.values()):
+        s = next(iter(students_prefs))
+        college_list = students_prefs[s]
 
-        # for each balcony in the list of balconies that the serenade prefers
-        for balcony in balcony_list:
-            # if the balcony has a slot available
-            if balcony_slots[balcony] > 0:
-                # the serenade is engaged to the balcony
-                serenade_engaged[b] = balcony
-                # the balcony has one less slot available
-                balcony_slots[balcony] -= 1
-                # remove the serenade from the list of serenades
-                del serenades_prefs[b]
-                # break out of the loop
+        for college in college_list:
+            if college_slots[college] > 0:
+                student_engaged[s] = college
+                college_slots[college] -= 1
+                del students_prefs[s]
                 break
 
-            # get the current partner of the serenade
-            current_partner = serenade_engaged.get(b)
-            # if the serenade has no partner
+            current_partner = student_engaged.get(s)
             if current_partner is None:
-                # continue to the next balcony
                 continue
 
-            # if the serenade prefers the current balcony to the current partner
-            if balconies_prefs[balcony].index(b) < balconies_prefs[balcony].index(current_partner):
-                # the serenade is engaged to the balcony
-                serenade_engaged[b] = balcony
-                # the current partner is no longer engaged
-                serenade_engaged[current_partner] = None
-                # remove the serenade from the list of serenades
-                del serenades_prefs[b]
-                # break out of the loop
+            if colleges_prefs[college].index(s) < colleges_prefs[college].index(current_partner):
+                student_engaged[s] = college
+                student_engaged[current_partner] = None
+                del students_prefs[s]
                 break
 
-            # remove the current balcony from the list of preferences
-            del serenades_prefs[b][0]
+            del students_prefs[s][0]
 
-    # return the dictionary of engaged serenades
-    return serenade_engaged
+    for student in students_prefs:
+        unmatched_students[student] = None
+
+    return student_engaged, unmatched_students
 
 
 # Example usage
-
-def __main__():
-    men = {
-        'A': ['Alpha', 'Beta', 'Gamma'],
-        'B': ['Beta', 'Alpha', 'Gamma'],
-        'C': ['Alpha', 'Beta', 'Gamma']
+def main():
+    students = {
+        'John': ['Stanford', 'Harvard', 'MIT'],
+        'Emily': ['MIT', 'Harvard', 'Stanford'],
+        'Michael': ['Stanford', 'MIT', 'Harvard'],
+        'Sophia': ['MIT', 'Stanford', 'Harvard'],
+        'David': ['MIT', 'Stanford', 'Harvard'],
+        'Olivia': ['Stanford', 'Harvard', 'MIT'],
+        'James': ['Stanford', 'MIT', 'Harvard'],
+        'Emma': ['MIT', 'Stanford', 'Harvard'],
+        'Daniel': ['Stanford', 'MIT', 'Harvard'],
+        'Grace': ['MIT', 'Stanford', 'Harvard'],
     }
 
-    women = {
-        'Alpha': ['B', 'A', 'C'],
-        'Beta': ['A', 'B', 'C'],
-        'Gamma': ['B', 'C', 'A']
+    colleges = {
+        'MIT': ['John', 'Emily', 'Michael', 'Sophia', 'David', 'Olivia', 'James', 'Emma', 'Daniel', 'Grace'],
+        'Stanford': ['John', 'Emily', 'Michael', 'Sophia', 'David', 'Olivia', 'James', 'Emma', 'Daniel', 'Grace'],
+        'Harvard': ['John', 'Emily', 'Michael', 'Sophia', 'David', 'Olivia', 'James', 'Emma', 'Daniel', 'Grace'],
     }
 
-    result = stable_marriage(men, women)
-    for serenade, balcony in result.items():
-        print(f"{serenade} is matched with {balcony}")
+    slots_per_college = 3  # Number of slots per college
+
+    result, unmatched_students = stable_marriage(students, colleges, slots_per_college)
+    for student, college in result.items():
+        print(f"{student} is matched with {college}")
+
+    print("Unmatched Students:")
+    for student in unmatched_students:
+        print(student)
 
 
 if __name__ == "__main__":
-    __main__()
-
+    main()
