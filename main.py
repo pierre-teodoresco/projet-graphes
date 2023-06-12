@@ -1,9 +1,11 @@
+# Authors: Eliot Colomb & Pierre Teodoresco
+
 # Stable Marriage Problem with Gale-Shapley Algorithm
 def stable_marriage(students, colleges, slots_per_college):
     students = {student: preferences for student, preferences in students.items()}  # Convertit la liste d'étudiants en dictionnaire
     colleges = {college: preferences for college, preferences in colleges.items()}  # Convertit la liste de collèges en dictionnaire
     student_engaged = {}  # Dictionnaire pour stocker les engagements des étudiants
-    college_slots = {college: slots_per_college for college in colleges}  # Dictionnaire pour stocker les places disponibles par collège
+    college_slots = slots_per_college.copy()  # Dictionnaire pour stocker les places disponibles par collège
     unmatched_students = {}  # Dictionnaire pour stocker les étudiants non appariés
 
     # Tant qu'il reste des étudiants et qu'il y a des places disponibles dans les collèges
@@ -51,15 +53,16 @@ def main():
         'MIT': ['Emily', 'Marc', 'John', 'Kylian']
     }
 
-    slots_per_college = 1
+    slots_per_college = {
+        'Harvard': 1,
+        'Stanford': 1,
+        'MIT': 1
+    }
 
     result, unmatched_students = stable_marriage(students, colleges, slots_per_college)
-
-    # Affichage des appariements
     for student, college in result.items():
         print(f"{student} is matched with {college}")
 
-    # Affichage des étudiants non appariés
     print("Unmatched Students:")
     for student in unmatched_students:
         print(student)
