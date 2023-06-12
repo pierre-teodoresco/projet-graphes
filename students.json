@@ -1,0 +1,19 @@
+[
+    {
+      "name": "Emily",
+      "preferences": ["Harvard", "MIT", "Stanford"]
+    },
+    {
+      "name": "Marc",
+      "preferences": ["Harvard", "Stanford", "MIT"]
+    },
+    {
+      "name": "John",
+      "preferences": ["Stanford", "Harvard", "MIT"]
+    },
+    {
+      "name": "Kylian",
+      "preferences": ["Stanford", "MIT", "Harvard"]
+    }
+  ]
+  

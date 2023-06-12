@@ -1,5 +1,7 @@
 # Authors: Eliot Colomb & Pierre Teodoresco
 
+import json
+
 # Stable Marriage Problem with Gale-Shapley Algorithm
 def stable_marriage(students, colleges, slots_per_college):
     students = {student: preferences for student, preferences in students.items()}  # Convertit la liste d'étudiants en dictionnaire
@@ -37,27 +39,33 @@ def stable_marriage(students, colleges, slots_per_college):
 
     return student_engaged, unmatched_students
 
+def read_students_from_json(filename):
+    with open(filename, 'r') as file:
+        data = json.load(file)
+    students = {}
+    for item in data:
+        name = item['name']
+        preferences = item['preferences']
+        students[name] = preferences
+    return students
+
+def read_colleges_from_json(filename):
+    with open(filename, 'r') as file:
+        data = json.load(file)
+    colleges = {}
+    slots_per_college = {}
+    for item in data:
+        name = item['name']
+        preferences = item['preferences']
+        slots = item['slots']
+        colleges[name] = preferences
+        slots_per_college[name] = slots
+    return colleges, slots_per_college
 
 # Example usage
 def main():
-    students = {
-        'Emily': ['Harvard', 'MIT', 'Stanford'],
-        'Marc': ['Harvard', 'Stanford', 'MIT'],
-        'John': ['Stanford', 'Harvard', 'MIT'],
-        'Kylian': ['Stanford', 'MIT', 'Harvard']
-    }
-
-    colleges = {
-        'Harvard': ['Emily', 'Marc', 'John', 'Kylian'],
-        'Stanford': ['Emily', 'Marc', 'John', 'Kylian'],
-        'MIT': ['Emily', 'Marc', 'John', 'Kylian']
-    }
-
-    slots_per_college = {
-        'Harvard': 1,
-        'Stanford': 1,
-        'MIT': 1
-    }
+    students = read_students_from_json('students.json')
+    colleges, slots_per_college = read_colleges_from_json('colleges.json')
 
     result, unmatched_students = stable_marriage(students, colleges, slots_per_college)
     for student, college in result.items():
