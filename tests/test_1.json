@@ -1,0 +1,26 @@
+{
+    "students_preferences": {
+        "Alice": ["Caltech", "Stanford", "MIT", "Harvard", "Oxford"],
+        "Bob": ["MIT", "Harvard", "Caltech", "Stanford", "Oxford"],
+        "Charlie": ["MIT", "Oxford", "Stanford", "Caltech", "Harvard"],
+        "Dave": ["Stanford", "MIT", "Harvard", "Oxford", "Caltech"],
+        "Eve": ["Oxford", "MIT", "Caltech", "Harvard", "Stanford"],
+        "Frank": ["Harvard", "Caltech", "Stanford", "MIT", "Oxford"],
+        "Grace": ["Caltech", "Stanford", "MIT", "Oxford", "Harvard"],
+        "Henry": ["MIT", "Harvard", "Oxford", "Stanford", "Caltech"]
+    },
+    "schools_preferences": {
+        "MIT": ["Alice", "Bob", "Charlie", "Dave", "Eve", "Frank", "Grace", "Henry"],
+        "Harvard": ["Dave", "Charlie", "Bob", "Alice", "Eve", "Frank", "Grace", "Henry"],
+        "Stanford": ["Bob", "Alice", "Dave", "Charlie", "Eve", "Frank", "Grace", "Henry"],
+        "Caltech": ["Eve", "Frank", "Charlie", "Bob", "Alice", "Dave", "Grace", "Henry"],
+        "Oxford": ["Frank", "Eve", "Dave", "Charlie", "Bob", "Alice", "Grace", "Henry"]
+    },
+    "school_seats": {
+        "MIT": 2,
+        "Harvard": 1,
+        "Stanford": 1,
+        "Caltech": 2,
+        "Oxford": 1
+    }
+}
