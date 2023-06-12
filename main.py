@@ -2,37 +2,37 @@
 # Authors: Eliot Colomb & Pierre Teodoresco
 
 # Stable Marriage Problem with Gale-Shapley Algorithm
-def stable_marriage(students_prefs, colleges_prefs, slots_per_college):
-    students_prefs = {student: preferences for student, preferences in students_prefs.items()}
-    colleges_prefs = {college: preferences for college, preferences in colleges_prefs.items()}
+def stable_marriage(students, colleges, slots_per_college):
+    students = {student: preferences for student, preferences in students.items()}
+    colleges = {college: preferences for college, preferences in colleges.items()}
     student_engaged = {}
-    college_slots = {college: slots_per_college for college in colleges_prefs}
+    college_slots = {college: slots_per_college for college in colleges}
     unmatched_students = {}
 
-    while students_prefs and any(slots > 0 for slots in college_slots.values()):
-        s = next(iter(students_prefs))
-        college_list = students_prefs[s]
+    while students and any(slots > 0 for slots in college_slots.values()):
+        s = next(iter(students))
+        college_list = students[s]
 
         for college in college_list:
             if college_slots[college] > 0:
                 student_engaged[s] = college
                 college_slots[college] -= 1
-                del students_prefs[s]
+                del students[s]
                 break
 
             current_partner = student_engaged.get(s)
             if current_partner is None:
                 continue
 
-            if colleges_prefs[college].index(s) < colleges_prefs[college].index(current_partner):
+            if colleges[college].index(s) < colleges[college].index(current_partner):
                 student_engaged[s] = college
                 student_engaged[current_partner] = None
-                del students_prefs[s]
+                del students[s]
                 break
 
-            del students_prefs[s][0]
+            del students[s][0]
 
-    for student in students_prefs:
+    for student in students:
         unmatched_students[student] = None
 
     return student_engaged, unmatched_students
