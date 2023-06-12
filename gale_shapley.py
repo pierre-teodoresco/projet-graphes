@@ -1,3 +1,6 @@
+# Authors : Eliot Colomb & Pierre Teodoresco
+
+# Gale-Shapley algorithm implementation for the stable marriage problem between students and schools
 def gale_shapley(students_preferences, schools_preferences, school_seats):
     # Initialize variables
     proposals = {student: iter(preferences) for student, preferences in students_preferences.items()}

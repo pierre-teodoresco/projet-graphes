@@ -1,3 +1,5 @@
+# Authors : Eliot Colomb & Pierre Teodoresco
+
 from gale_shapley import gale_shapley
 
 import json
