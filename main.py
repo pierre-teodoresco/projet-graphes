@@ -22,7 +22,7 @@ def main():
     for school, students in matchings.items():
         print(f"{school}: {students}")
     print(f"Number of rounds: {rounds}")
-    print("Students without a school:")
+    print("Unmatched:")
     print(students_without_school)
 
 if __name__ == '__main__':
