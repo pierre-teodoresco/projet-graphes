@@ -28,7 +28,7 @@ def gale_shapley(students_preferences, schools_preferences, school_seats):
                 free_students.remove(student)
                 continue
             school_queues[school].append(student)
-            # Sort the school queue by the school's preferences
+            # Sort the school queue by the preference of the current school
             school_queues[school].sort(key=lambda x: schools_preferences[school].index(x))
 
         # Process school queues
