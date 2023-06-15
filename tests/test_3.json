@@ -1,0 +1,19 @@
+{
+    "students_preferences": {
+        "Alice": ["MIT", "Harvard", "Caltech", "Stanford"],
+        "Bob": ["MIT", "Harvard", "Caltech", "Stanford"],
+        "Charlie": ["MIT", "Stanford", "Harvard", "Caltech"]
+    },
+    "schools_preferences": {
+        "MIT": ["Alice", "Bob", "Charlie"],
+        "Harvard": ["Alice", "Charlie", "Bob"],
+        "Stanford": ["Bob", "Alice", "Charlie"],
+        "Caltech": ["Bob", "Charlie", "Alice"]
+    },
+    "school_seats": {
+        "MIT": 1,
+        "Harvard": 1,
+        "Stanford": 1,
+        "Caltech": 1
+    }
+}

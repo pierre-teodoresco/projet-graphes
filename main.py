@@ -6,14 +6,15 @@ import json
 
 def main():
     # Charger les données du fichier JSON
-    with open('tests/test_1.json') as file:
+    with open('tests/test_3.json') as file:
         data = json.load(file)
 
     # Appeler la fonction gale_shapley avec les données du fichier JSON
     matchings, rounds, students_without_school = gale_shapley(
         data['students_preferences'],
         data['schools_preferences'],
-        data['school_seats']
+        data['school_seats'],
+        False
     )
 
     # Afficher les résultats

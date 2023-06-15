@@ -1,0 +1,15 @@
+{
+    "students_preferences": {
+        "Alice": ["MIT", "Oxford"],
+        "Bob": ["MIT", "Oxford"],
+        "Charlie": ["Oxford", "MIT"]
+    },
+    "schools_preferences": {
+        "MIT": ["Bob", "Charlie", "Alice"],
+        "Oxford": ["Bob", "Alice", "Charlie"]
+    },
+    "school_seats": {
+        "MIT": 1,
+        "Oxford": 2
+    }
+}
